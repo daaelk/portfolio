@@ -1,0 +1,830 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daael Khan - Portfolio</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --neon-blue: #00f5ff;
+      --neon-green: #00ff88;
+      --dark-bg: #0a0a0f;
+      --card-bg: rgba(20, 20, 30, 0.6);
+    }
+    
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--neon-blue) transparent;
+    }
+    
+    .font-orbitron { font-family: 'Orbitron', monospace; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    
+    /* Animated gradient background */
+    .cyber-bg {
+      background: linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0a0f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cyber-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 245, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 245, 255, 0.05) 0%, transparent 30%);
+      animation: pulse-bg 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-bg {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    
+    /* Grid pattern overlay */
+    .grid-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: grid-move 20s linear infinite;
+    }
+    
+    @keyframes grid-move {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+    
+    /* Glassmorphism cards */
+    .glass-card {
+      background: rgba(15, 15, 25, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(0, 245, 255, 0.4);
+      box-shadow: 
+        0 0 30px rgba(0, 245, 255, 0.15),
+        inset 0 0 30px rgba(0, 245, 255, 0.05);
+      transform: translateY(-5px);
+    }
+    
+    /* Glowing text */
+    .glow-text {
+      text-shadow: 
+        0 0 10px rgba(0, 245, 255, 0.5),
+        0 0 20px rgba(0, 245, 255, 0.3),
+        0 0 40px rgba(0, 245, 255, 0.2);
+    }
+    
+    .glow-green {
+      text-shadow: 
+        0 0 10px rgba(0, 255, 136, 0.5),
+        0 0 20px rgba(0, 255, 136, 0.3);
+    }
+    
+    /* Animated skill bars */
+    .skill-bar-container {
+      background: rgba(0, 245, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 8px;
+    }
+    
+    .skill-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00f5ff, #00ff88);
+      box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+      transform-origin: left;
+      animation: skill-fill 1.5s ease-out forwards;
+      transform: scaleX(0);
+    }
+    
+    @keyframes skill-fill {
+      to { transform: scaleX(1); }
+    }
+    
+    /* Timeline styles */
+    .timeline-line {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #00f5ff, #00ff88, transparent);
+    }
+    
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(135deg, #00f5ff, #00ff88);
+      border-radius: 50%;
+      position: absolute;
+      left: 17px;
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes dot-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 245, 255, 0.6); }
+      50% { box-shadow: 0 0 35px rgba(0, 245, 255, 0.9), 0 0 50px rgba(0, 255, 136, 0.4); }
+    }
+    
+    /* Floating animation */
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* Typing effect */
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #00f5ff;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    /* Section entrance animations */
+    .section-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: section-enter 0.8s ease-out forwards;
+    }
+    
+    @keyframes section-enter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.5s; }
+    .delay-4 { animation-delay: 0.7s; }
+    .delay-5 { animation-delay: 0.9s; }
+    
+    /* Icon glow */
+    .icon-glow {
+      filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.6));
+    }
+    
+    /* Project card special effects */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        transparent 40%,
+        rgba(0, 245, 255, 0.1) 50%,
+        transparent 60%,
+        transparent
+      );
+      animation: shimmer 3s ease-in-out infinite;
+      transform: translateX(-100%);
+    }
+    
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+    
+    /* Code snippet decoration */
+    .code-snippet {
+      font-family: 'Fira Code', monospace;
+      background: rgba(0, 245, 255, 0.05);
+      border-left: 3px solid #00f5ff;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: rgba(0, 245, 255, 0.7);
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(10px); opacity: 0.5; }
+    }
+    
+    /* Neon border animation */
+    .neon-border {
+      position: relative;
+    }
+    
+    .neon-border::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, #00f5ff, #00ff88, #00f5ff);
+      border-radius: 18px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .neon-border:hover::after {
+      opacity: 0.6;
+      animation: neon-rotate 3s linear infinite;
+    }
+    
+    @keyframes neon-rotate {
+      100% { filter: hue-rotate(360deg); }
+    }
+    
+    /* Particle effect on profile */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00f5ff;
+      border-radius: 50%;
+      animation: particle-float 4s ease-in-out infinite;
+    }
+    
+    @keyframes particle-float {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+      50% { transform: translate(20px, -30px) scale(0.5); opacity: 0.2; }
+    }
+    
+    /* Nav dots */
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(0, 245, 255, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .nav-dot:hover, .nav-dot.active {
+      background: #00f5ff;
+      box-shadow: 0 0 15px rgba(0, 245, 255, 0.8);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-inter">
+  <div class="h-full overflow-auto cyber-bg text-white">
+   <div class="grid-pattern"></div><!-- Navigation Dots -->
+   <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-4">
+    <div class="nav-dot active" data-section="profile" title="Profile"></div>
+    <div class="nav-dot" data-section="education" title="Education"></div>
+    <div class="nav-dot" data-section="skills" title="Skills"></div>
+    <div class="nav-dot" data-section="projects" title="Projects"></div>
+    <div class="nav-dot" data-section="extra" title="Extra"></div>
+   </nav>
+   <div class="relative z-10 max-w-6xl mx-auto px-6 py-12"><!-- PROFILE SECTION -->
+    <section id="profile" class="section-animate delay-1 mb-20">
+     <div class="glass-card p-8 md:p-12 relative overflow-hidden"><!-- Decorative particles -->
+      <div class="particle" style="top: 20%; left: 10%;"></div>
+      <div class="particle" style="top: 60%; left: 85%; animation-delay: 1s;"></div>
+      <div class="particle" style="top: 80%; left: 30%; animation-delay: 2s;"></div><!-- Code decoration -->
+      <div class="absolute top-4 right-4 code-snippet hidden md:block">
+       &lt;developer status="passionate" /&gt;
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-8"><!-- Avatar with glow -->
+       <div class="relative float">
+        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-cyan-400 via-cyan-500 to-emerald-400 p-1">
+         <div class="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
+          <svg class="w-24 h-24 text-cyan-400 icon-glow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg><img src="port pic.png" alt="">
+         </div>
+        </div>
+        <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-cyan-400 to-emerald-400 rounded-lg flex items-center justify-center transform rotate-12">
+         <svg class="w-6 h-6 text-gray-900" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+         </svg>
+        </div>
+       </div>
+       <div class="text-center md:text-left flex-1">
+        <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+         <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div><span class="text-emerald-400 text-sm font-medium tracking-wider uppercase">Available for Opportunities</span>
+        </div>
+        <h1 id="profile-name" class="font-orbitron text-4xl md:text-6xl font-bold mb-3 glow-text text-cyan-400">Daael Khan</h1>
+        <p id="profile-title" class="text-lg md:text-xl text-gray-300 mb-6 typing-cursor">Aspiring Front-End Developer | Tech Enthusiast | Cybersecurity Learner</p>
+        <p id="profile-intro" class="text-gray-400 leading-relaxed max-w-2xl">"A multi-skilled and fast-learning tech enthusiast with hands-on experience in front-end development, digital tools, content creation, and social media management. Passionate about technology, problem-solving, and currently exploring cybersecurity and ethical hacking."</p><!-- Quick stats -->
+        <div class="flex flex-wrap justify-center md:justify-start gap-6 mt-8">
+         <div class="text-center">
+          <div class="font-orbitron text-2xl text-cyan-400 glow-text">
+           BCA
+          </div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider">
+           Pursuing
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="font-orbitron text-2xl text-emerald-400 glow-green">
+           85%
+          </div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider">
+           12th Grade
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="font-orbitron text-2xl text-cyan-400 glow-text">
+           5+
+          </div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider">
+           Skills
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- EDUCATION SECTION -->
+    <section id="education" class="section-animate delay-2 mb-20">
+     <div class="flex items-center gap-4 mb-8">
+      <svg class="w-8 h-8 text-cyan-400 icon-glow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /> <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /> <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+      </svg>
+      <h2 class="font-orbitron text-3xl font-bold text-white">Education<span class="text-cyan-400">.</span></h2>
+     </div>
+     <div class="relative pl-16">
+      <div class="timeline-line"></div><!-- Education Item 1 -->
+      <div class="relative mb-12 glass-card p-6">
+       <div class="timeline-dot" style="top: 24px;"></div>
+       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+         <h3 id="edu-1-title" class="font-orbitron text-xl text-cyan-400 mb-1">Class 10th</h3>
+         <p id="edu-1-school" class="text-gray-300">Andhra Education Society</p>
+        </div>
+        <div class="flex items-center gap-3">
+         <div class="text-right">
+          <div class="font-orbitron text-2xl text-emerald-400 glow-green">
+           80%
+          </div>
+          <div class="text-xs text-gray-500 uppercase">
+           Percentage
+          </div>
+         </div>
+         <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400/20 to-emerald-400/20 flex items-center justify-center border border-cyan-400/30">
+          <svg class="w-8 h-8 text-cyan-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         </div>
+        </div>
+       </div>
+      </div><!-- Education Item 2 -->
+      <div class="relative mb-12 glass-card p-6">
+       <div class="timeline-dot" style="top: 24px;"></div>
+       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+         <h3 id="edu-2-title" class="font-orbitron text-xl text-cyan-400 mb-1">Class 12th</h3>
+         <p id="edu-2-school" class="text-gray-300">Andhra Education Society</p>
+        </div>
+        <div class="flex items-center gap-3">
+         <div class="text-right">
+          <div class="font-orbitron text-2xl text-emerald-400 glow-green">
+           85%
+          </div>
+          <div class="text-xs text-gray-500 uppercase">
+           Percentage
+          </div>
+         </div>
+         <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400/20 to-emerald-400/20 flex items-center justify-center border border-cyan-400/30">
+          <svg class="w-8 h-8 text-emerald-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         </div>
+        </div>
+       </div>
+      </div><!-- Education Item 3 -->
+      <div class="relative glass-card p-6 neon-border">
+       <div class="timeline-dot" style="top: 24px;"></div>
+       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+         <div class="flex items-center gap-2 mb-2"><span class="px-3 py-1 bg-cyan-400/20 text-cyan-400 text-xs font-bold rounded-full border border-cyan-400/40 animate-pulse">CURRENT</span>
+         </div>
+         <h3 id="edu-3-title" class="font-orbitron text-xl text-cyan-400 mb-1">Bachelor of Computer Applications (BCA)</h3>
+         <p id="edu-3-school" class="text-gray-300">Don Bosco Institute of Technology, IP University</p>
+        </div>
+        <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400/20 to-emerald-400/20 flex items-center justify-center border border-cyan-400/30">
+         <svg class="w-8 h-8 text-cyan-400 animate-pulse" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- SKILLS SECTION -->
+    <section id="skills" class="section-animate delay-3 mb-20">
+     <div class="flex items-center gap-4 mb-8">
+      <svg class="w-8 h-8 text-emerald-400 icon-glow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <h2 class="font-orbitron text-3xl font-bold text-white">Skills<span class="text-emerald-400">.</span></h2>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6"><!-- Technical Skills -->
+      <div class="glass-card p-6">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-cyan-400/20 flex items-center justify-center">
+         <svg class="w-5 h-5 text-cyan-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+         </svg>
+        </div>
+        <h3 class="font-orbitron text-lg text-cyan-400">Technical</h3>
+       </div>
+       <div class="space-y-5">
+        <div>
+         <div class="flex justify-between mb-2"><span class="text-sm text-gray-300">HTML &amp; CSS</span> <span class="text-xs text-cyan-400">85%</span>
+         </div>
+         <div class="skill-bar-container">
+          <div class="skill-bar" style="--skill-width: 85%; width: 85%;"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Microsoft Excel</span> <span class="text-xs text-cyan-400">80%</span>
+         </div>
+         <div class="skill-bar-container">
+          <div class="skill-bar" style="width: 80%; animation-delay: 0.2s;"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Microsoft Word</span> <span class="text-xs text-cyan-400">90%</span>
+         </div>
+         <div class="skill-bar-container">
+          <div class="skill-bar" style="width: 90%; animation-delay: 0.4s;"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-2"><span class="text-sm text-gray-300">C Programming</span> <span class="text-xs text-cyan-400">70%</span>
+         </div>
+         <div class="skill-bar-container">
+          <div class="skill-bar" style="width: 70%; animation-delay: 0.6s;"></div>
+         </div>
+        </div>
+        <div>
+         <div class="flex justify-between mb-2"><span class="text-sm text-gray-300">Video Editing</span> <span class="text-xs text-cyan-400">75%</span>
+         </div>
+         <div class="skill-bar-container">
+          <div class="skill-bar" style="width: 75%; animation-delay: 0.8s;"></div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Digital & Social Skills -->
+      <div class="glass-card p-6">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-emerald-400/20 flex items-center justify-center">
+         <svg class="w-5 h-5 text-emerald-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+         </svg>
+        </div>
+        <h3 class="font-orbitron text-lg text-emerald-400">Digital &amp; Social</h3>
+       </div>
+       <div class="space-y-4">
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+         <svg class="w-5 h-5 text-emerald-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg><span class="text-gray-300 text-sm">Social Media Management</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+         <svg class="w-5 h-5 text-emerald-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+         </svg><span class="text-gray-300 text-sm">Content Creation &amp; Editing</span>
+        </div>
+       </div>
+      </div><!-- Soft Skills & Learning -->
+      <div class="glass-card p-6">
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-purple-400/20 flex items-center justify-center">
+         <svg class="w-5 h-5 text-purple-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+         </svg>
+        </div>
+        <h3 class="font-orbitron text-lg text-purple-400">Soft Skills</h3>
+       </div>
+       <div class="flex flex-wrap gap-2 mb-6"><span class="px-3 py-2 rounded-lg bg-purple-400/10 text-purple-300 text-sm border border-purple-400/20">Problem Solving</span> <span class="px-3 py-2 rounded-lg bg-purple-400/10 text-purple-300 text-sm border border-purple-400/20">Quick Learner</span> <span class="px-3 py-2 rounded-lg bg-purple-400/10 text-purple-300 text-sm border border-purple-400/20">Analytical Thinking</span>
+       </div>
+       <div class="border-t border-white/10 pt-4">
+        <div class="flex items-center gap-3 mb-3">
+         <svg class="w-5 h-5 text-red-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+         </svg>
+         <h4 class="font-orbitron text-sm text-red-400">Currently Learning</h4>
+        </div>
+        <div class="space-y-2">
+         <div class="flex items-center gap-2 text-sm text-gray-400"><span class="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"></span> Cybersecurity Basics
+         </div>
+         <div class="flex items-center gap-2 text-sm text-gray-400"><span class="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"></span> Ethical Hacking Fundamentals
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- PROJECTS SECTION -->
+    <section id="projects" class="section-animate delay-4 mb-20">
+     <div class="flex items-center gap-4 mb-8">
+      <svg class="w-8 h-8 text-cyan-400 icon-glow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+      <h2 class="font-orbitron text-3xl font-bold text-white">Projects<span class="text-cyan-400">.</span></h2>
+     </div>
+     <div class="glass-card project-card p-8 neon-border">
+      <div class="flex flex-col lg:flex-row gap-8"><!-- Project Visual -->
+       <div class="lg:w-1/3">
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-cyan-400/20 via-emerald-400/10 to-purple-400/20 flex items-center justify-center border border-cyan-400/30 overflow-hidden relative">
+         <img class="h-full w-full" src="2.jpg" alt="">
+         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+         <div class="absolute bottom-4 left-4 right-4">
+          <div class="flex gap-2"><span class="px-2 py-1 bg-cyan-400/20 text-cyan-400 text-xs rounded border border-cyan-400/30">Web Design</span> <span class="px-2 py-1 bg-emerald-400/20 text-emerald-400 text-xs rounded border border-emerald-400/30">Digital</span><span class="px-2 py-1 bg-cyan-400/20 text-cyan-400 text-xs rounded border border-cyan-400/30"><a href="https://waterlife-india.com/">Project Link</a></span>
+          </div>
+         </div>
+        </div>
+       </div><!-- Project Details -->
+       <div class="lg:w-2/3">
+        <h3 id="project-name" class="font-orbitron text-2xl text-cyan-400 mb-2 glow-text">Waterlife – Premium Bathroom &amp; C.P Fittings</h3>
+        <p id="project-role" class="text-emerald-400 text-sm mb-4 flex items-center gap-2">
+         <svg class="w-4 h-4" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+         </svg> Website Design, Product Listing &amp; Digital Presence</p>
+        <p id="project-description" class="text-gray-400 leading-relaxed mb-6">"Developed and managed the digital presence for Waterlife, a taps and sanitary brand. Worked on website structure, product showcasing, and online marketplace listings."</p><!-- Tech Stack -->
+        <div class="mb-6">
+         <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-3">Technologies Used</h4>
+         <div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 bg-white/5 text-gray-300 text-sm rounded-lg border border-white/10 hover:border-cyan-400/50 transition-colors">HTML</span> <span class="px-3 py-1.5 bg-white/5 text-gray-300 text-sm rounded-lg border border-white/10 hover:border-cyan-400/50 transition-colors">CSS</span> <span class="px-3 py-1.5 bg-white/5 text-gray-300 text-sm rounded-lg border border-white/10 hover:border-cyan-400/50 transition-colors">Web Design</span> <span class="px-3 py-1.5 bg-white/5 text-gray-300 text-sm rounded-lg border border-white/10 hover:border-cyan-400/50 transition-colors">Product Listing</span>
+         </div>
+        </div><!-- Project Stats -->
+        <div class="grid grid-cols-3 gap-4">
+         <div class="text-center p-3 rounded-lg bg-white/5">
+          <div class="font-orbitron text-xl text-cyan-400">
+           1
+          </div>
+          <div class="text-xs text-gray-500">
+           Live Project
+          </div>
+         </div>
+         <div class="text-center p-3 rounded-lg bg-white/5">
+          <div class="font-orbitron text-xl text-emerald-400">
+           100%
+          </div>
+          <div class="text-xs text-gray-500">
+           Completed
+          </div>
+         </div>
+         <div class="text-center p-3 rounded-lg bg-white/5">
+          <div class="font-orbitron text-xl text-purple-400">
+           Active
+          </div>
+          <div class="text-xs text-gray-500">
+           Status
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- EXTRA SKILLS SECTION -->
+    <section id="extra" class="section-animate delay-5 mb-12">
+     <div class="flex items-center gap-4 mb-8">
+      <svg class="w-8 h-8 text-purple-400 icon-glow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+      </svg>
+      <h2 class="font-orbitron text-3xl font-bold text-white">Extra Skills<span class="text-purple-400">.</span></h2>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card p-6 text-center hover:scale-105 transition-transform">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center border border-pink-500/30">
+        <svg class="w-8 h-8 text-pink-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h3 class="font-orbitron text-lg text-pink-400 mb-2">Reels Editing</h3>
+       <p class="text-gray-400 text-sm">Instagram Reels &amp; Visual Storytelling</p>
+      </div>
+      <div class="glass-card p-6 text-center hover:scale-105 transition-transform">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-orange-500/20 to-yellow-500/20 flex items-center justify-center border border-orange-500/30">
+        <svg class="w-8 h-8 text-orange-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h3 class="font-orbitron text-lg text-orange-400 mb-2">Tech Content</h3>
+       <p class="text-gray-400 text-sm">Tech Content Creation</p>
+      </div>
+      <div class="glass-card p-6 text-center hover:scale-105 transition-transform">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center border border-blue-500/30">
+        <svg class="w-8 h-8 text-blue-400" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+       </div>
+       <h3 class="font-orbitron text-lg text-blue-400 mb-2">Digital Branding</h3>
+       <p class="text-gray-400 text-sm">Digital Branding Support</p>
+      </div>
+     </div>
+    </section><!-- Footer -->
+    <footer class="text-center py-8 border-t border-white/10">
+     <div class="code-snippet inline-block mb-4">
+      console.log("Thanks for visiting! 🚀");
+     </div>
+     <p class="text-gray-500 text-sm">© 2025 Daael Khan • Built with passion for tech</p>
+    </footer>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      name: "Daael Khan",
+      title: "Aspiring Front-End Developer | Tech Enthusiast | Cybersecurity Learner",
+      intro_text: "\"A multi-skilled and fast-learning tech enthusiast with hands-on experience in front-end development, digital tools, content creation, and social media management. Passionate about technology, problem-solving, and currently exploring cybersecurity and ethical hacking.\"",
+      edu_1_title: "Class 10th",
+      edu_1_school: "Andhra Education Society",
+      edu_2_title: "Class 12th",
+      edu_2_school: "Andhra Education Society",
+      edu_3_title: "Bachelor of Computer Applications (BCA)",
+      edu_3_school: "Don Bosco Institute of Technology, IP University",
+      project_name: "Waterlife – Taps & Sanitary Brand",
+      project_role: "Website Design, Product Listing & Digital Presence",
+      project_description: "\"Developed and managed the digital presence for Waterlife, a taps and sanitary brand. Worked on website structure, product showcasing, and online marketplace listings.\"",
+      primary_color: "#00f5ff",
+      secondary_color: "#00ff88",
+      background_color: "#0a0a0f",
+      text_color: "#ffffff",
+      accent_color: "#a855f7"
+    };
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update profile section
+          const nameEl = document.getElementById('profile-name');
+          if (nameEl) nameEl.textContent = config.name || defaultConfig.name;
+          
+          const titleEl = document.getElementById('profile-title');
+          if (titleEl) titleEl.textContent = config.title || defaultConfig.title;
+          
+          const introEl = document.getElementById('profile-intro');
+          if (introEl) introEl.textContent = config.intro_text || defaultConfig.intro_text;
+          
+          // Update education section
+          const edu1Title = document.getElementById('edu-1-title');
+          if (edu1Title) edu1Title.textContent = config.edu_1_title || defaultConfig.edu_1_title;
+          
+          const edu1School = document.getElementById('edu-1-school');
+          if (edu1School) edu1School.textContent = config.edu_1_school || defaultConfig.edu_1_school;
+          
+          const edu2Title = document.getElementById('edu-2-title');
+          if (edu2Title) edu2Title.textContent = config.edu_2_title || defaultConfig.edu_2_title;
+          
+          const edu2School = document.getElementById('edu-2-school');
+          if (edu2School) edu2School.textContent = config.edu_2_school || defaultConfig.edu_2_school;
+          
+          const edu3Title = document.getElementById('edu-3-title');
+          if (edu3Title) edu3Title.textContent = config.edu_3_title || defaultConfig.edu_3_title;
+          
+          const edu3School = document.getElementById('edu-3-school');
+          if (edu3School) edu3School.textContent = config.edu_3_school || defaultConfig.edu_3_school;
+          
+          // Update project section
+          const projectName = document.getElementById('project-name');
+          if (projectName) projectName.textContent = config.project_name || defaultConfig.project_name;
+          
+          const projectRole = document.getElementById('project-role');
+          if (projectRole) {
+            const svg = projectRole.querySelector('svg');
+            const svgHtml = svg ? svg.outerHTML : '';
+            projectRole.innerHTML = svgHtml + (config.project_role || defaultConfig.project_role);
+          }
+          
+          const projectDesc = document.getElementById('project-description');
+          if (projectDesc) projectDesc.textContent = config.project_description || defaultConfig.project_description;
+          
+          // Update colors
+          document.documentElement.style.setProperty('--neon-blue', config.primary_color || defaultConfig.primary_color);
+          document.documentElement.style.setProperty('--neon-green', config.secondary_color || defaultConfig.secondary_color);
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["name", config.name || defaultConfig.name],
+          ["title", config.title || defaultConfig.title],
+          ["intro_text", config.intro_text || defaultConfig.intro_text],
+          ["edu_1_title", config.edu_1_title || defaultConfig.edu_1_title],
+          ["edu_1_school", config.edu_1_school || defaultConfig.edu_1_school],
+          ["edu_2_title", config.edu_2_title || defaultConfig.edu_2_title],
+          ["edu_2_school", config.edu_2_school || defaultConfig.edu_2_school],
+          ["edu_3_title", config.edu_3_title || defaultConfig.edu_3_title],
+          ["edu_3_school", config.edu_3_school || defaultConfig.edu_3_school],
+          ["project_name", config.project_name || defaultConfig.project_name],
+          ["project_role", config.project_role || defaultConfig.project_role],
+          ["project_description", config.project_description || defaultConfig.project_description]
+        ])
+      });
+    }
+    
+    // Navigation dots functionality
+    document.querySelectorAll('.nav-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        const sectionId = dot.dataset.section;
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+        }
+      });
+    });
+    
+    // Update active nav dot on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.classList.toggle('active', dot.dataset.section === id);
+          });
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+    
+    // Animate skill bars on scroll
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    skillBars.forEach(bar => {
+      bar.style.animationPlayState = 'paused';
+      skillObserver.observe(bar);
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bdbd84140d191a3',t:'MTc2ODM4MDE5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
